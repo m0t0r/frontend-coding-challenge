@@ -12,7 +12,8 @@ require("../shared/navigation/navigation-controllers.js");
 require("../shared/navigation/navigation-directives.js");
 require("../shared/navigation/navigation-services.js");
 require("./app-partials.js");
-require("./reports/main.js");
+require("./reports/reports.module.js");
+require("./reports/reports.routes.js");
 
 // Declare app level module which depends on filters, and services
 var app = angular.module("alcPlatform", [
@@ -28,7 +29,7 @@ var app = angular.module("alcPlatform", [
 	"navigation.directives",
 	"navigation.controllers",
 	"navigation.services",
-	"reports.controllers"
+	'alcPlatform.reports'
 ]);
 
 app.config(["$routeProvider", function($routeProvider) {
