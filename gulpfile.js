@@ -31,6 +31,7 @@ var cleancss = new LessPluginCleanCSS({ advanced: true, verbose: true, debug: tr
 var compress = true;
 var replace = require("gulp-replace");
 var Karma = require('karma').Server;
+var jshint = require('gulp-jshint');
 
 var argv = parseargs(process.argv.slice(2));
 
@@ -373,7 +374,7 @@ gulp.task("less", gulpsync.sync(["commithash", "uncompressed", "copyfrom", "html
 gulp.task("apps", gulpsync.sync(["commithash", "uncompressed", "copyfrom", "html", "apps-scripts", "copyto"], "sync apps"));
 
 // Watch files and trigger minimal builds
-gulp.task("watch", function() {
+gulp.task("watch", ['lint'], function() {
 	gulp.watch(buildPathArray(paths.static.source, lists.css.watch), ["less"]);
 	gulp.watch(buildPathArray(paths.static.source, lists.main.watch), ["main"]);
 	gulp.watch(buildPathArray(paths.static.source, lists.apps.watch), ["apps"]);
@@ -389,17 +390,28 @@ gulp.task("default", ["clean-build"]);
 
 // Karma tasks
 
-gulp.task('test', function(done) {
+gulp.task('test', ['lint'], function(done) {
   new Karma({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done).start();
 });
 
-gulp.task('test:watch', function(done) {
+gulp.task('test:watch', ['lint'], function(done) {
   new Karma({
     configFile: __dirname + '/karma.conf.js',
     singleRun: false,
     autoWatch: true
   }, done).start();
+});
+
+// Lint task
+
+gulp.task('lint', function() {
+  // TODO: Do not limit linting to only reports directory
+  return gulp.src([
+      'src/js/apps/platform/reports/**/*.js'
+    ])
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'));
 });
