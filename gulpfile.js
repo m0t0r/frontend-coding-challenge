@@ -30,6 +30,7 @@ var LessPluginCleanCSS = require("less-plugin-clean-css");
 var cleancss = new LessPluginCleanCSS({ advanced: true, verbose: true, debug: true });
 var compress = true;
 var replace = require("gulp-replace");
+var Karma = require('karma').Server;
 
 var argv = parseargs(process.argv.slice(2));
 
@@ -149,7 +150,7 @@ var lists = {
 // Only build specific themes if the command line --themes is provided
 if (argv.themes) {
 	var themelist = argv.themes.split(",");
-	
+
 	lists.css.build = [];
 	for (var u = 0; u < themelist.length; u++)
 		lists.css.build.push("less/themes/" + themelist[u] + "*.less");
@@ -159,7 +160,7 @@ if (argv.themes) {
 function buildPathArray(prefix, paths) {
 	var list = [];
 	prefix = prefix || "";
-	
+
 	for (var u = 0; u < paths.length; u++)
 		list.push(prefix + paths[u]);
 
@@ -178,7 +179,7 @@ gulp.task("commithash", function(callback) {
 	githash = "12345";
 	callback();
 });
-    
+
 // Set the build output to be uncompressed and unminified
 gulp.task("uncompressed", function() {
 	compress = false;
@@ -255,7 +256,7 @@ gulp.task("css", function() {
 	return gulp.src(buildPathArray(paths.build.source, lists.css.build))
 		.pipe(foreach(function(stream, file) {
 			var basename = path.basename(file.path, ".less");
-			
+
 			return gulp.src(buildPathArray(paths.build.source, lists.css.master))
 				.pipe(inject.after("//import \"theme.less\";", "\n@import \"themes/" + basename + "\";"))
 				.pipe(sourcemaps.init({ loadMaps: true, debug: true }))
@@ -287,10 +288,10 @@ gulp.task("apps-partials", function() {
 				var pathArray = file.path.split("\\");
 			else
 				var pathArray = file.path.split("/");
-			
+
 			pathArray.pop();
 			var basename = pathArray.pop();
-			
+
 			return gulp.src(file.path + "/**/*.html")
 				.pipe(minifyhtml(options.minifiy))
 				.pipe(ngtemplates({
@@ -317,7 +318,7 @@ gulp.task("apps-scripts", ["apps-partials"], function() {
 
 			pathArray.pop();
 			var basename = pathArray.pop();
-			
+
 			var bundler = new browserify(options.browserify);
 			bundler.add(file.path);
 			bundler.external("moment");
@@ -385,3 +386,20 @@ gulp.task("help", function() {
 
 // Default build task
 gulp.task("default", ["clean-build"]);
+
+// Karma tasks
+
+gulp.task('test', function(done) {
+  new Karma({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
+gulp.task('test:watch', function(done) {
+  new Karma({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: false,
+    autoWatch: true
+  }, done).start();
+});
