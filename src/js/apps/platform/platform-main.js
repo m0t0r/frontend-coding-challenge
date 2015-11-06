@@ -14,6 +14,7 @@ require("../shared/navigation/navigation-services.js");
 require("./app-partials.js");
 require("./reports/reports.module.js");
 require("./reports/reports.routes.js");
+require("./reports/at-labourcost-report/at-labourcost-report.directive.js");
 
 // Declare app level module which depends on filters, and services
 var app = angular.module("alcPlatform", [

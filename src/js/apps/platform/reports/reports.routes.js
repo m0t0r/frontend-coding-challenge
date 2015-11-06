@@ -9,8 +9,8 @@
 
   function reportsRoutes($routeProvider) {
     $routeProvider
-      .when("/report-labour-cost", {
-        templateUrl: "labourcost-content.html"
+      .when('/report-labour-cost', {
+        template: '<at-labourcost-report></at-labourcost-report>'
       });
   }
 
