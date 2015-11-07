@@ -6,6 +6,8 @@ Angular Filters for use in common apps
 
 var app = angular.module("alchemytec.filters", []);
 
+require('./filters/round.filter.js');
+
 // Filter for nice currency display - GBP symbol, commas every three places, 0 decimal places
 // Usage: {{ 1235022 | sterling }}
 //	outputs £12,350
@@ -145,3 +147,5 @@ app.filter("pluralise", function () {
 		return "";
 	};
 });
+
+module.exports = app;

@@ -32,8 +32,8 @@
        <tr ng-repeat="data in vm.costdata">
          <td>{{data.name}}</td>
          <td>{{data.workerCount }}</td>
-         <td>{{data.complianceStats.Total | number:0 || 0 }}%</td>
-         <td>{{data.grossPayTotal | number }}</td>
+         <td>{{data.complianceStats.Total || 0 | number:0 | percentage }}</td>
+         <td>{{data.grossPayTotal | round | number }}</td>
          <td>-</td>
          <td>{{data.labourCostTotal | number }}</td>
          <td>1.5%</td>

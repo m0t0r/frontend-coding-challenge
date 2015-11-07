@@ -35,7 +35,7 @@
       
       vm.sortBy = function(fieldName) {
           vm.costdata = _.sortBy(vm.costdata , fieldName);
-      }
+      };
     }
   }
 
