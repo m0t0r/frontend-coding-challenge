@@ -6,8 +6,14 @@
     .filter('round', roundFilter);
   
   function roundFilter() {
-    return function(input) {
-      return Math.round(input / 100);
+    return function(input, proportion, truncate) {
+      proportion = proportion || 10;
+
+      if(truncate) {
+        return Math.round(input / proportion);
+      }
+
+      return Math.round(input * proportion) / proportion;
     }
   }
 
