@@ -18,7 +18,9 @@ module.exports = function(config) {
       'src/js/libs-angular/angular/angular.js',
       'src/js/libs-angular/angular/angular-mocks.js',
       'src/js/common/angular.filters.js',
+      'src/js/common/angular.directives.js',
       'src/js/common/filters/**/*.js',
+      'src/js/common/directives/**/*.js',
       'src/js/**/*.spec.js'
     ],
 
@@ -32,7 +34,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'src/js/common/angular.filters.js' : [ 'browserify' ],
-      'src/js/**/*.spec.js' : [ 'browserify' ]
+      'src/js/common/angular.directives.js' : [ 'browserify' ]
     },
 
     browserify: {

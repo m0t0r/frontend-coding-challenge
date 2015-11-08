@@ -1,7 +1,7 @@
 describe('round filter', function() {
   var roundFilter;
 
-  beforeEach(function () {
+  beforeEach(function() {
     angular.mock.module('alchemytec.filters');
 
     angular.mock.inject(function($filter) {

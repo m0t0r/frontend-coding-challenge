@@ -13,3 +13,6 @@ var app = angular.module("alchemytec.directives", [
 	"alchemytec.spinnything",
 	"alchemytec.clicktoggle"
 ]);
+
+require('./directives/at-sortable/at-sortable-manager.directive');
+require('./directives/at-sortable/at-sortable-column.directive');

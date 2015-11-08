@@ -1,4 +1,4 @@
-<div>
+<div class="at-labourcost-report">
   <h2>Labour cost report</h2>
   <div class="list-table">
     <div class="header-row">
@@ -8,7 +8,7 @@
     <div class="body-row">
       <div class="col-25">Example data entry</div>
     </div>
-    <div class="body-row">
+    <div class="body-row selected">
       <div class="col-25">Example data entry</div>
     </div>
     <div class="body-row">
@@ -16,28 +16,39 @@
     </div>
   </div>
 
-  <table>
+  <table class="labourcost-table">
     <thead>
-      <tr>
-        <th ng-click="vm.sortBy('name')">Payroll Provider</th>
-        <th>Worker</th>
-        <th>Complience Score</th>
-        <th>Gross Pay (&pound;)</th>
-        <th>Payroll Admin</th>
-        <th>Labour Cost (&pound;)</th>
-        <th>Work-force</th>
+      <tr at-sortable-manager sort-data="vm.costdata">
+        <th at-sortable-column="name"><a href="">Payroll Provider<i class="icon"></i></a></th>
+        <th at-sortable-column="workerCount"><a href="">Worker<i class="icon"></i></a></th>
+        <th at-sortable-column="complianceStats.Total"><a href="">Complience Score<i class="icon"></i></a></th>
+        <th at-sortable-column="grossPayTotal"><a href="">Gross Pay (&pound;)<i class="icon"></i></a></th>
+        <th at-sortable-column="payrollAdmin"><a href="">Payroll Admin<i class="icon"></i></a></th>
+        <th at-sortable-column="labourCostTotal"><a href="">Labour Cost (&pound;)<i class="icon"></i></a></th>
+        <th at-sortable-column="workforce"><a href="">Workforce<i class="icon"></i></a></th>
       </tr>
     </thead>
     <tbody>
-       <tr ng-repeat="data in vm.costdata">
-         <td>{{data.name}}</td>
-         <td>{{data.workerCount }}</td>
-         <td>{{data.complianceStats.Total || 0 | number:0 | percentage }}</td>
-         <td>{{data.grossPayTotal | round | number }}</td>
-         <td>-</td>
-         <td>{{data.labourCostTotal | number }}</td>
-         <td>1.5%</td>
+       <tr ng-repeat="row in vm.costdata track by $index">
+         <td>{{row.name}}</td>
+         <td>{{row.workerCount }}</td>
+         <td>{{row.complianceStats.Total || 0 | number:0 | percentage }}</td>
+         <td>{{row.grossPayTotal | round:100:true | number }}</td>
+         <td>{{row.payrollAdmin || '-'}}</td>
+         <td>{{row.labourCostTotal | round:100:true | number }}</td>
+         <td>{{row.workforce | round | percentage:1}}</td>
        </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td>{{ vm.total.name }}</td>
+        <td>{{ vm.total.workerCount }}</td>
+        <td>{{ vm.total.complianceStats.Total | number:0 | percentage }}</td>
+        <td>{{ vm.total.grossPayTotal | round:100:true | number }}</td>
+        <td>-</td>
+        <td>{{ vm.total.labourCostTotal | round:100:true | number }}</td>
+        <td>100.0%</td>
+      </tr>
+    </tfoot>
   </table>
 </div>

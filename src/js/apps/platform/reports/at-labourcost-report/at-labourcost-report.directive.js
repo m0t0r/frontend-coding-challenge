@@ -30,12 +30,13 @@
 
       rest.at(rest.api.costs).get().then(function(costdata) {
         vm.costdata = _.union(costdata[0].directContractors, costdata[0].providers);
-        vm.sortBy('name');
+        vm.total = costdata[0].total[0];
+
+        // count workforce values
+        _.each(vm.costdata,function(row) {
+          row.workforce = row.workerCount / vm.total.workerCount * 100;
+        });
       });
-      
-      vm.sortBy = function(fieldName) {
-          vm.costdata = _.sortBy(vm.costdata , fieldName);
-      };
     }
   }
 
