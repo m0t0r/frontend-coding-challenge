@@ -10,7 +10,8 @@
       require: '^atSortableManager',
       scope: {
         column: '@atSortableColumn',
-        default: '@'
+        default: '@?',
+        freezeValue: '@?'
       },
       link: atSortableColumnLinkFn
     };
@@ -19,10 +20,7 @@
       var icon = el.find('.icon');
       scope.order = null;
 
-      if(scope.default) {
-        atSortableMngCtrl.sortBy(el);
-        scope.$apply();
-      }
+      atSortableMngCtrl.registerColumn(el);
 
       el.bind('click', function() {
         atSortableMngCtrl.sortBy(el);
@@ -31,11 +29,11 @@
 
       scope.toggleChevronClass = function() {
         if(scope.order === 'asc') {
-          icon.removeClass('chevron-up');
-          icon.addClass('chevron-down');
-        } else {
           icon.removeClass('chevron-down');
           icon.addClass('chevron-up');
+        } else {
+          icon.removeClass('chevron-up');
+          icon.addClass('chevron-down');
         }
       };
 
