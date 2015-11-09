@@ -26,6 +26,7 @@
                 ctrl.sortBy(column);
               }
             });
+
             columns.length = 0;
             unbindWatcher();
           }

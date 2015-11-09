@@ -19,7 +19,7 @@
   <table class="labourcost-table">
     <thead>
       <tr at-sortable-manager sort-data="vm.costdata">
-        <th at-sortable-column="name"><a href="">Payroll Provider<i class="icon"></i></a></th>
+        <th at-sortable-column="name" default="true" freeze-value="Direct Contractors"><a href="">Payroll Provider<i class="icon"></i></a></th>
         <th at-sortable-column="workerCount"><a href="">Worker<i class="icon"></i></a></th>
         <th at-sortable-column="complianceStats.Total"><a href="">Complience Score<i class="icon"></i></a></th>
         <th at-sortable-column="grossPayTotal"><a href="">Gross Pay (&pound;)<i class="icon"></i></a></th>
@@ -47,7 +47,7 @@
         <td>{{ vm.total.grossPayTotal | round:100:true | number }}</td>
         <td>-</td>
         <td>{{ vm.total.labourCostTotal | round:100:true | number }}</td>
-        <td>100.0%</td>
+        <td>{{ vm.total.workforceTotal | percentage}}</td>
       </tr>
     </tfoot>
   </table>

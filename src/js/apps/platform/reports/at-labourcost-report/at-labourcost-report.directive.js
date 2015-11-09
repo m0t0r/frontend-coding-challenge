@@ -36,6 +36,11 @@
         _.each(vm.costdata,function(row) {
           row.workforce = row.workerCount / vm.total.workerCount * 100;
         });
+
+        // count workforce total
+        vm.total.workforceTotal = _.chain(vm.costdata).pluck('workforce').reduce(function(pVal, nVal) {
+          return pVal + nVal;
+        }).value();
       });
     }
   }
