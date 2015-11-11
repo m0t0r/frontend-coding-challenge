@@ -13,27 +13,27 @@
         <th class="figures" at-sortable-column="workforce"><a href="">Work-<br>force<i class="icon"></i></a></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody ng-class="{'loaded': vm.loaded}">
        <tr ng-repeat="row in vm.costdata track by $index">
-         <td>{{row.name}}</td>
-         <td class="bigger">{{row.workerCount }}</td>
-         <td class="divider" >{{row.complianceStats.Total || 0 | number:0 | percentage }}</td>
-         <td class="figures bigger stronger">{{row.grossPayTotal | round:100:true | number }}</td>
-         <td class="figures bigger">{{row.payrollAdmin || '-'}}</td>
-         <td class="divider figures bigger">{{row.labourCostTotal | round:100:true | number }}</td>
-         <td class="figures">{{row.workforce | round | percentage:1}}</td>
+         <td data-label="Payroll Provider" >{{row.name}}</td>
+         <td data-label="Worker" class="bigger">{{row.workerCount }}</td>
+         <td data-label="Complience Score" class="divider" >{{row.complianceStats.Total || 0 | number:0 | percentage }}</td>
+         <td data-label="Gross Pay (&pound;)" class="figures bigger stronger">{{row.grossPayTotal | round:100:true | number }}</td>
+         <td data-label="Payroll Admin(&pound;)" class="figures bigger">{{row.payrollAdmin || '-'}}</td>
+         <td data-label="Labour Cost (&pound;)" class="divider figures bigger">{{row.labourCostTotal | round:100:true | number }}</td>
+         <td data-label="Workforce" class="figures">{{row.workforce | round | percentage:1}}</td>
        </tr>
     </tbody>
-    <tfoot>
+    <tfoot ng-class="{'loaded': vm.loaded}">
       <tr class="separator"></tr>
       <tr>
-        <td>{{ vm.total.name }}</td>
-        <td class="bigger">{{ vm.total.workerCount }}</td>
-        <td class="divider">{{ vm.total.complianceStats.Total | number:0 | percentage }}</td>
-        <td class="figures bigger">{{ vm.total.grossPayTotal | round:100:true | number }}</td>
-        <td class="figures bigger">{{row.payrollAdminTotal || '-'}}</td>
-        <td class="divider figures bigger">{{ vm.total.labourCostTotal | round:100:true | number }}</td>
-        <td class="figures">{{ vm.total.workforceTotal | percentage:1}}</td>
+        <td data-label="Payroll Provider" >{{ vm.total.name }}</td>
+        <td data-label="Worker" class="bigger">{{ vm.total.workerCount }}</td>
+        <td data-label="Complience Score" class="divider">{{ vm.total.complianceStats.Total | number:0 | percentage }}</td>
+        <td data-label="Gross Pay (&pound;)" class="figures bigger">{{ vm.total.grossPayTotal | round:100:true | number }}</td>
+        <td data-label="Payroll Admin(&pound;)" class="figures bigger">{{row.payrollAdminTotal || '-'}}</td>
+        <td data-label="Labour Cost (&pound;)" class="divider figures bigger">{{ vm.total.labourCostTotal | round:100:true | number }}</td>
+        <td data-label="Workforce" class="figures">{{ vm.total.workforceTotal | percentage:1}}</td>
       </tr>
     </tfoot>
   </table>

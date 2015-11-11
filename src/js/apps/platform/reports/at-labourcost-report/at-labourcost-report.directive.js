@@ -19,6 +19,7 @@
 
     function atLabourcostReportCtrl() {
       var vm = this;
+      vm.loaded = false;
 
       $navigation.select({
         forward: "reports",
@@ -42,6 +43,8 @@
         vm.total.workforceTotal = _.chain(vm.costdata).pluck('workforce').reduce(function(pVal, nVal) {
           return pVal + nVal;
         }).value();
+
+        vm.loaded = true;
       });
     }
   }

@@ -1,4 +1,5 @@
 .at-labourcost-report {
+  min-height: 954px;
 
   .labourcost-table {
     width: 100%;
@@ -34,6 +35,15 @@
       }
     }
 
+    tbody, tfoot {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    tbody.loaded, tfoot.loaded {
+      opacity: 1;
+    }
+
     .separator {
       height:20px;
     }
@@ -53,6 +63,55 @@
 
     .stronger {
       color: @dark-deep-grey-color;
+    }
+  }
+}
+
+@media screen and (max-width: 40em){
+
+  .at-labourcost-report {
+
+    .labourcost-table {
+      font-weight: 300;
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      td {
+        display: block;
+        text-align: right;
+        font-size: 1rem;
+        border-bottom: 1px dotted #A6ABAE;
+      }
+
+      td:last-child {
+        border-bottom: 1px solid #A6ABAE;
+        margin-bottom: 20px;
+      }
+
+      td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+      }
+
+      .separator {
+        display: none;
+      }
+
+      .divider {
+        border-right: 0;
+      }
+      
+      .bigger {
+        font-size: 1rem;
+      }
     }
   }
 }
