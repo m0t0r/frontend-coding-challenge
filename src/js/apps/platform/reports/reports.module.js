@@ -7,16 +7,16 @@
 
   runBlock.$inject = ['appsections', 'navigation'];
 
-  function runBlock(appsections, navigation) {
+  function runBlock($appsections, $navigation) {
     // Add app button
-    appsections.add({
+    $appsections.add({
       title: "Reports",
       icon: "app-reports",
       app: "report-labour-cost",
       accesslist: [ "reports" ]
     });
 
-    navigation.add({
+    $navigation.add({
       reports: {
         pagetitle: "Reports",
         mainheading: "Labour cost report",
