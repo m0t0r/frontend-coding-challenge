@@ -13,9 +13,9 @@
         controller: atSortableManagerCtrl
       };
 
-      atSortableManagerCtrl.$inject = ['$scope'];
+      atSortableManagerCtrl.$inject = ['$scope', '$element'];
 
-      function atSortableManagerCtrl($scope) {
+      function atSortableManagerCtrl($scope, $element) {
         var ctrl = this, previousColumn, columns = [], unbindWatcher;
 
         // once sort data is loaded check on default column and sort it
@@ -47,6 +47,15 @@
             }
           }
 
+          // add/remove separator for 'frozen' rows
+          if(column.isolateScope().freezeValue) {
+            if ($element.find('tbody tr.separator').length === 0) {
+              angular.element($element.find('tbody tr')[0]).after('<tr class="separator"></tr>');
+            }
+          } else {
+            angular.element($element.find('tbody tr.separator')).remove();
+          }
+
           column.isolateScope().toggleChevronClass();
           previousColumn = column;
         };
@@ -61,7 +70,7 @@
           }
 
           if(column.isolateScope().freezeValue) {
-            freezeRow(column)
+            freezeRow(column);
           }
         }
 

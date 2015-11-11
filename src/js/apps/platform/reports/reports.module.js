@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('alcPlatform.reports', [])
+    .module('alcPlatform.reports', ['ngAnimate'])
     .run(runBlock);
 
   runBlock.$inject = ['appsections', 'navigation'];
@@ -28,5 +28,4 @@
       }
     });
   }
-
 }());

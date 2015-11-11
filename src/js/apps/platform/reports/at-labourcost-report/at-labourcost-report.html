@@ -1,53 +1,39 @@
 <div class="at-labourcost-report">
   <h2>Labour cost report</h2>
-  <div class="list-table">
-    <div class="header-row">
-      <div class="col-25">Example heading</div>
-    </div>
-
-    <div class="body-row">
-      <div class="col-25">Example data entry</div>
-    </div>
-    <div class="body-row selected">
-      <div class="col-25">Example data entry</div>
-    </div>
-    <div class="body-row">
-      <div class="col-25">Example data entry</div>
-    </div>
-  </div>
-
-  <table class="labourcost-table">
+  <table class="labourcost-table" at-sortable-manager sort-data="vm.costdata">
+    <col width="20%">
     <thead>
-      <tr at-sortable-manager sort-data="vm.costdata">
-        <th at-sortable-column="name" default="true" freeze-value="Direct Contractors"><a href="">Payroll Provider<i class="icon"></i></a></th>
+      <tr>
+        <th at-sortable-column="name" default="true" freeze-value="Direct Contractors"><a href="">Payroll <br> Provider<i class="icon"></i></a></th>
         <th at-sortable-column="workerCount"><a href="">Worker<i class="icon"></i></a></th>
-        <th at-sortable-column="complianceStats.Total"><a href="">Complience Score<i class="icon"></i></a></th>
-        <th at-sortable-column="grossPayTotal"><a href="">Gross Pay (&pound;)<i class="icon"></i></a></th>
-        <th at-sortable-column="payrollAdmin"><a href="">Payroll Admin<i class="icon"></i></a></th>
-        <th at-sortable-column="labourCostTotal"><a href="">Labour Cost (&pound;)<i class="icon"></i></a></th>
-        <th at-sortable-column="workforce"><a href="">Workforce<i class="icon"></i></a></th>
+        <th at-sortable-column="complianceStats.Total"><a href="">Complience <br> Score<i class="icon"></i></a></th>
+        <th class="figures" at-sortable-column="grossPayTotal"><a href="">Gross <br> Pay (&pound;)<i class="icon"></i></a></th>
+        <th class="figures" at-sortable-column="payrollAdmin"><a href="">Payroll <br> Admin(&pound;)<i class="icon"></i></a></th>
+        <th class="figures" at-sortable-column="labourCostTotal"><a href="">Labour <br> Cost (&pound;)<i class="icon"></i></a></th>
+        <th class="figures" at-sortable-column="workforce"><a href="">Work-<br>force<i class="icon"></i></a></th>
       </tr>
     </thead>
     <tbody>
        <tr ng-repeat="row in vm.costdata track by $index">
          <td>{{row.name}}</td>
-         <td>{{row.workerCount }}</td>
-         <td>{{row.complianceStats.Total || 0 | number:0 | percentage }}</td>
-         <td>{{row.grossPayTotal | round:100:true | number }}</td>
-         <td>{{row.payrollAdmin || '-'}}</td>
-         <td>{{row.labourCostTotal | round:100:true | number }}</td>
-         <td>{{row.workforce | round | percentage:1}}</td>
+         <td class="bigger">{{row.workerCount }}</td>
+         <td class="divider" >{{row.complianceStats.Total || 0 | number:0 | percentage }}</td>
+         <td class="figures bigger stronger">{{row.grossPayTotal | round:100:true | number }}</td>
+         <td class="figures bigger">{{row.payrollAdmin || '-'}}</td>
+         <td class="divider figures bigger">{{row.labourCostTotal | round:100:true | number }}</td>
+         <td class="figures">{{row.workforce | round | percentage:1}}</td>
        </tr>
     </tbody>
     <tfoot>
+      <tr class="separator"></tr>
       <tr>
         <td>{{ vm.total.name }}</td>
-        <td>{{ vm.total.workerCount }}</td>
-        <td>{{ vm.total.complianceStats.Total | number:0 | percentage }}</td>
-        <td>{{ vm.total.grossPayTotal | round:100:true | number }}</td>
-        <td>-</td>
-        <td>{{ vm.total.labourCostTotal | round:100:true | number }}</td>
-        <td>{{ vm.total.workforceTotal | percentage}}</td>
+        <td class="bigger">{{ vm.total.workerCount }}</td>
+        <td class="divider">{{ vm.total.complianceStats.Total | number:0 | percentage }}</td>
+        <td class="figures bigger">{{ vm.total.grossPayTotal | round:100:true | number }}</td>
+        <td class="figures bigger">{{row.payrollAdminTotal || '-'}}</td>
+        <td class="divider figures bigger">{{ vm.total.labourCostTotal | round:100:true | number }}</td>
+        <td class="figures">{{ vm.total.workforceTotal | percentage:1}}</td>
       </tr>
     </tfoot>
   </table>

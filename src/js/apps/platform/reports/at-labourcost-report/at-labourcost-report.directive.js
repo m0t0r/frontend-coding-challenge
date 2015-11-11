@@ -6,6 +6,7 @@
     .directive('atLabourcostReport', atLabourcostReport);
 
   atLabourcostReport.$inject = ['$rootScope', 'restalchemy', 'navigation'];
+
   function atLabourcostReport($rootScope, $restalchemy, $navigation) {
     return {
       replace: true,
